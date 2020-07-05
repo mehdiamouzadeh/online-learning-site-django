@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+<div class="row">
+    <div class="col-12 mb-2">
+        <h1>
+        بر اساس دسته بندی
+        </h1>
+    </div>
+</div>
+ <div class="row">
+    {% for course in courses %}
+    <div class="col-3 mb-2">
+        <div class="card" >
+          <div class="inner">
+            <img src="{{course.image.url}}" class="card-img-top" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{course.title}}</h5>
+            <p class="card-text">{{course.description}} ...</p>
+            <div class="row mb-1">
+              <div class="col-6">
+                <i class="fa fa-clock-o" >{{course.created}}</i>
+              </div>
+              <div class="col-6">
+                <i class=" fa fa-user" >{{course.username}}</i>
+              </div>
+            </div>
+            <a href="#" class="btn btn-primary">ادامه مطلب</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+</div> 
+</div>
+
+{% endblock %}
