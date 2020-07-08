@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load crispy_forms_tags %}
+{% load jalali_tags %}
 {% block content %}
       <!-- Page Content -->
   <section class="py-5  sec-1" >
@@ -101,17 +102,17 @@
                         <img src="{{course.image.url}}" class="card-img-top" alt="...">
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title">{{course.title}}</h5>
-                        <p class="card-text">{{course.description}} ...</p>
+                        <h5 class="card-title">{{course.name}}</h5>
+                        <p class="card-text">{{course.description|truncatewords:4}}</p>
                         <div class="row mb-1">
-                          <div class="col-6">
-                            <i class="fa fa-clock-o" >{{course.created}}</i>
+                          <div class="col-12">
+                            {{course.created|to_jalali:'%y/%m/%d_%H:%M:%S'}} <i class="fa fa-clock-o" ></i>
                           </div>
-                          <div class="col-6">
-                            <i class=" fa fa-user" >{{course.username}}</i>
+                          <div class="col-12">
+                            {{course.username}} <i class=" fa fa-user" ></i>
                           </div>
                         </div>
-                        <a href="#" class="btn btn-primary">ادامه مطلب</a>
+                        <a href="{% url 'app-home:detail' course.id %}" class="btn btn-primary">ادامه مطلب</a>
                       </div>
                     </div>
                   </div>

@@ -6,7 +6,13 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 user = get_user_model()
 # Create your models here.
-
+def validate_file_extension(value):
+    import os
+    from django.core.exceptions import ValidationError
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.mp4']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError('Unsupported file extension.')
 
 class Course(models.Model):
     username = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,null=True)
@@ -40,7 +46,7 @@ class Category(models.Model):
 class Session(models.Model):
     username = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,null=True)
     title = models.CharField(max_length=255, verbose_name="عنوان جلسه")
-    video = models.FileField(upload_to='media/',verbose_name='ویدیوی جلسه')
+    video = models.FileField(upload_to='media/',verbose_name='ویدیوی جلسه',validators=[validate_file_extension])
     course = models.ForeignKey(Course, verbose_name="مرتبط با کدام دوره",on_delete=models.CASCADE,null=True)
     class Meta:
         verbose_name = ('جلسه دروس')

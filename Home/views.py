@@ -6,13 +6,26 @@ from .forms import RegisterForm
 from .models import *
 # Create your views here.
 def index(request):
-    course = Course.objects.all()[:3]
+    course = Course.objects.all()[:5]
     categories =Category.objects.all()
     context={
         'courses':course,
         'categories':categories,
     }
     return render(request,'index.html',context)
+
+
+
+def Coursedetail(request,id):
+    detail_course =Course.objects.get(id=id)
+    sessions = detail_course.session_set.all()
+    counts = detail_course.session_set.all().count()
+    context={
+        'detail':detail_course,
+        'sessions':sessions,
+        'counts':counts
+    }
+    return render(request,'more-info.html',context)
 
 def category(request,category):
     # course = Course.objects.all()
@@ -27,7 +40,11 @@ def category(request,category):
     }
     return render(request,'category.html',context)
 
+
+
+
 def signup(request):
+
     if request.method == 'POST':
         form =  RegisterForm(request.POST)
         if form.is_valid():

@@ -43,7 +43,9 @@ class CourseAdmin(admin.ModelAdmin):
             kwargs['initial'] = request.user.id
             return db_field.formfield(**kwargs)
 
-        return super(CourseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)           
+        return super(CourseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    list_display=['name','username','publish']           
 
                 
 admin.site.register(Course,CourseAdmin)

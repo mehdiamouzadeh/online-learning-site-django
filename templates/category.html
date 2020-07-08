@@ -28,7 +28,7 @@
                 <i class=" fa fa-user" >{{course.username}}</i>
               </div>
             </div>
-            <a href="#" class="btn btn-primary">ادامه مطلب</a>
+            <a href="{% url 'app-home:detail' course.id %}" class="btn btn-primary">ادامه مطلب</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+
+    {% block content %}
+    <!-- content -->
+    <div class="container">
+        <section class="py-5 wow bounceInUp sec-4">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <h2 class="text-center">آموزش برنامه نویسی پایتون</h2>
+                        
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <img src="{{detail.image.url}}" class="w-100  mh-100 img-fluid" alt="">
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      
+                        <div class="col-12">
+                          <ul class="nav nav-pills mb-3" style="direction: rtl;" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">توضیحات دوره</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">جلسات دوره</a>
+                            </li>
+                            
+                          </ul>
+                          <hr>
+                          <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                              {{detail.description}}
+                            </div>
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                              {% for session in sessions %}
+                                
+                              <div class="row course-list mt-2 p-3" >
+                                <div class="col-2 text-center">
+                                  
+                                  <i class="fa fa-lock text-primary "></i>
+                                  <a href="{{session.video.url}}"><i class="fa fa-download m-2 text-primary"></i></a>
+                                  
+                                </div>
+                                <div class="col-9">
+                                  {{session.title}}
+
+                                </div>
+                                <div class="col-1">
+                                  <span class="badge badge-pill badge-success">{{forloop.counter}}</span>
+                                </div>
+                              </div>
+                                
+                              {%endfor %}
+                            </div>
+                          </div>
+                        </div>
+                      
+                    </div>
+                    <!-- Comment----------------------------------- -->
+                  <div class="row mt-3 text-success">
+                    <div class="col-12">
+                      <h3>نظرات کاربران</h3>
+                    </div>
+                  </div>
+                  <div class="row comment  p-2 mt-3">
+                    
+                    <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
+                    
+                    
+                    <div class="col-12 ">
+                      <div class="row">
+                        
+                        <div class="col-11">
+                          <p class="text-primary">username<br>
+                          1399/3/8</p>
+                        </div>
+                        <div class="col-1 " style="left:-2%;">
+                          <i class="fa fa-user" style="font-size: 50px;"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <p>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                    </div>
+                  </div>  
+                  <div class="row comment  p-2 mt-3">
+                    
+                    <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
+                    
+                    
+                    <div class="col-12 ">
+                      <div class="row">
+                        
+                        <div class="col-11">
+                          <p class="text-primary">username<br>
+                          1399/3/8</p>
+                        </div>
+                        <div class="col-1" style="left:-2%;">
+                          <i class="fa fa-user" style="font-size: 50px;"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <p>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                    </div>
+                  </div>  
+                  <div class="row comment  p-2 mt-3">
+                    
+                    <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
+                    
+                    
+                    <div class="col-12 ">
+                      <div class="row">
+                        
+                        <div class="col-11">
+                          <p class="text-primary">username<br>
+                          1399/3/8</p>
+                        </div>
+                        <div class="col-1" style="left:-2%;">
+                          <i class="fa fa-user" style="font-size: 50px;"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <p>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                    </div>
+                  </div>
+                  
+                  <!-- Comment submit -->
+                  <div class="row mt-3">
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1"><h3>ثبت نظرات</h3></label>
+                        <textarea class="form-control" style="direction: rtl;" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-success">ثبت نظر</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 mt-2 ">
+                    <div class="row">
+                        <div class="col-12 course-info">
+                            <div class="row bg-success info-head p-2">
+                                <div class="col-12">
+                                    <h2 class="text-light">رایگان</h2>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <ul class="info-ul">
+                                        <li>
+                                           لقمان آوند <i class="fa fa-user text-muted"></i>
+                                        </li>
+                                        <li class="mt-2">
+                                           زبان: فارسی <i class="fa fa-globe text-muted"></i>
+                                        </li>
+                                        <li class="mt-2">
+                                            تعداد جلسات: {{counts}} جلسه <i class="fa fa-clock-o text-muted"></i>
+                                        </li>
+                                        <li class="mt-2">
+                                            تعداد دانشجویان: 100 نفر <i class="fa fa-users text-muted"></i>
+                                        </li>
+                                        <li class="mt-2">
+                                            سطح : حرفه ای <i class="fa fa-unlock text-muted"></i>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 tag-content p-3">
+                      <div class="col-12 mb-2">
+                        <h3>برچسب ها</h3>
+                      <hr>
+
+                      </div>
+                      <div class="col-12">
+                        <span class="ml-2">تکنولوژی</span>
+                        <span class="ml-2">تکنولوژی</span>
+                        <span class="ml-2">تکنولوژی</span>
+                        <span class="ml-2">تکنولوژی</span>
+                        <span class="ml-2">تکنولوژی</span>
+                        <span class="ml-2">تکنولوژی</span>
+                        <span class="ml-2">تکنولوژی</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="py-3 wow bounceInUp sec-4">
+          <div class="row">
+            <div class="col-12">
+              <h3>دوره های دیگر</h3>
+            </div>
+            <div class="col-md-3 col-sm-12 ">
+              <div class="card" >
+                <div class="inner">
+                  <img src="image/html.png-hamyarit.com-html.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">آموزش HTml</h5>
+                  <p class="card-text">Some quick example text to build on the card title ...</p>
+                  <div class="row mb-1">
+                    <div class="col-6">
+                      <i class="fa fa-clock-o" > 6 دقیقه پیش</i>
+                    </div>
+                    <div class="col-6">
+                      <i class=" fa fa-user" > لقمان آوند</i>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-primary">ادامه مطلب</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12 ">
+              <div class="card" >
+                <div class="inner">
+                  <img src="image/js.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">آموزش Js</h5>
+                  <p class="card-text">Some quick example text to build on the card title ...</p>
+                  <div class="row mb-1">
+                    <div class="col-6">
+                      <i class="fa fa-clock-o" > 6 دقیقه پیش</i>
+                    </div>
+                    <div class="col-6">
+                      <i class=" fa fa-user" > لقمان آوند</i>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-primary">ادامه مطلب</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12 ">
+              <div class="card" >
+                <div class="inner">
+                  <img src="image/css.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">آموزش Css</h5>
+                  <p class="card-text">Some quick example text to build on the card title ...</p>
+                  <div class="row mb-1">
+                    <div class="col-6">
+                      <i class="fa fa-clock-o" > 6 دقیقه پیش</i>
+                    </div>
+                    <div class="col-6">
+                      <i class=" fa fa-user" > لقمان آوند</i>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-primary">ادامه مطلب</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12 ">
+              <div class="card " >
+                <div class="inner">
+                  <img src="image/css.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">آموزش Css</h5>
+                  <p class="card-text">Some quick example text to build on the card title ...</p>
+                  <div class="row mb-1">
+                    <div class="col-6">
+                      <i class="fa fa-clock-o" > 6 دقیقه پیش</i>
+                    </div>
+                    <div class="col-6">
+                      <i class=" fa fa-user" > لقمان آوند</i>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-primary">ادامه مطلب</a>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+    </div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+      
