@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 user = get_user_model()
+from django_currentuser.middleware import (
+    get_current_user, get_current_authenticated_user)
+# As model field:
+from django_currentuser.db.models import CurrentUserField
+
 # Create your models here.
 def validate_file_extension(value):
     import os
@@ -33,6 +38,19 @@ class Course(models.Model):
     class Meta:
         verbose_name = ('درس')
         verbose_name_plural = ('درس ها')
+
+class Comment(models.Model):
+    post = models.ForeignKey('Course',on_delete=models.CASCADE,related_name='comments')
+    user = CurrentUserField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.user)        
 
 
 class Category(models.Model):

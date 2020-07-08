@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 
 # Register your models here.
-from .models import Course,Category,Session
+from .models import Course,Category,Session,Comment
 
 
 class SessionAdmin(admin.ModelAdmin):
@@ -45,8 +45,24 @@ class CourseAdmin(admin.ModelAdmin):
 
         return super(CourseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-    list_display=['name','username','publish']           
+    list_display=['name','username','publish']
 
+class CommentAdmin(admin.ModelAdmin):
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'user':
+            kwargs['initial'] = request.user.id
+            return db_field.formfield(**kwargs)
+
+        return super(CommentAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    list_display = ('user',  'post', 'created_on', 'active')
+    # list_filter = ('active', 'created_on')
+    # search_fields = ('user', 'email', 'body')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)               
+
+admin.site.register(Comment,CommentAdmin)
                 
 admin.site.register(Course,CourseAdmin)
 admin.site.register(Category)

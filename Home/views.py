@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
-from .forms import RegisterForm
+from .forms import RegisterForm , CommentForm
 from .models import *
 # Create your views here.
 def index(request):
@@ -20,10 +20,28 @@ def Coursedetail(request,id):
     detail_course =Course.objects.get(id=id)
     sessions = detail_course.session_set.all()
     counts = detail_course.session_set.all().count()
+    comments = detail_course.comments.filter(active=True)
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = detail_course
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
     context={
         'detail':detail_course,
         'sessions':sessions,
-        'counts':counts
+        'counts':counts,
+        'comments': comments,
+        'new_comment': new_comment,
+        'comment_form': comment_form
     }
     return render(request,'more-info.html',context)
 
