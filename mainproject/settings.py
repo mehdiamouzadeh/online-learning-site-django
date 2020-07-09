@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'Home',
     'crispy_forms',
     'jalali_date',
+    'ckeditor',
+    'ckeditor_uploader',
+    
     
 ]
 
@@ -134,3 +137,13 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'app-home:index'
 LOGOUT_REDIRECT_URL = 'app-home:index'
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+ 
+CKEDITOR_UPLOAD_PATH = os.path.join(BASE_DIR, 'media')
+CKEDITOR_IMAGE_BACKEND = "pillow"
+ 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
