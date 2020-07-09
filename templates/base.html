@@ -71,6 +71,11 @@
                         <li class="nav-item">
                           <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">درباره ما</a>
                         </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                          <a class="nav-link " href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">خروج</a>
+                        </li>
+                        {% endif %}
                       </ul>
                       <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -86,30 +91,21 @@
             <div class="col-12 text-right">
               <h1 class="font-weight-light animated bounceInLeft">..آموزش آنلاین برنامه نویسی , طراحی سایت و</h1>
               <p class="lead animated bounceInLeft delay-1s">A great starter layout for a landing page</p>
+              {% if request.user.is_anonymous %}
               <button class="btn btn-success animated bounceInUp" type="button"data-toggle="modal" data-target="#exampleModalCenter">ورود</button>
+              {% endif %}
               <!-- Modal -->
               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="direction: rtl;">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalCenterTitle">فرم ورود به سایت</h5>
+                      <h5 class="modal-title" id="exampleModalCenterTitle"> ورود به سایت</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="validationDefaultUsername">نام کاربری</label>
-                          <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="emailHelp" placeholder="Enter username">
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        
-                        <button type="submit" class="btn btn-warning">ورود</button>
-                      </form>
+                    <div class="modal-body" style="text-align: center;">
+                      <a class="btn btn-success" href="{% url 'login' %}" style="text-align: center;"> ورود به صفحه لاگین</a>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

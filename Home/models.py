@@ -40,11 +40,11 @@ class Course(models.Model):
         verbose_name_plural = ('درس ها')
 
 class Comment(models.Model):
-    post = models.ForeignKey('Course',on_delete=models.CASCADE,related_name='comments')
-    user = CurrentUserField()
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+    post = models.ForeignKey('Course',on_delete=models.CASCADE,verbose_name='مربوط به پست',related_name='comments')
+    user = CurrentUserField(verbose_name='کاربر')
+    body = models.TextField(verbose_name='متن نظر')
+    created_on = models.DateTimeField(auto_now_add=True,verbose_name='اضافه شده در')
+    active = models.BooleanField(default=False,verbose_name='وضعیت انتشار')
 
     class Meta:
         ordering = ['created_on']

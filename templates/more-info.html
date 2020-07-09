@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
+{% load jalali_tags %}
 
     {% block content %}
     <!-- content -->
@@ -67,6 +68,8 @@
                       <h3>نظرات کاربران</h3>
                     </div>
                   </div>
+                  {% if detail.comments.all %}
+                  {% for comment in comments %}
                   <div class="row comment  p-2 mt-3">
                     
                     <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
@@ -76,8 +79,8 @@
                       <div class="row">
                         
                         <div class="col-11">
-                          <p class="text-primary">username<br>
-                          1399/3/8</p>
+                          <p class="text-primary">{{comment.user}}<br>
+                          {{comment.created_on|to_jalali}}</p>
                         </div>
                         <div class="col-1 " style="left:-2%;">
                           <i class="fa fa-user" style="font-size: 50px;"></i>
@@ -85,51 +88,17 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <p>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                      <p>{{comment.body}}</p>
                     </div>
                   </div>  
-                  <div class="row comment  p-2 mt-3">
-                    
-                    <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
-                    
-                    
-                    <div class="col-12 ">
-                      <div class="row">
-                        
-                        <div class="col-11">
-                          <p class="text-primary">username<br>
-                          1399/3/8</p>
-                        </div>
-                        <div class="col-1" style="left:-2%;">
-                          <i class="fa fa-user" style="font-size: 50px;"></i>
-                        </div>
-                      </div>
-                    </div>
+                  {% endfor %}
+                  {% else %}
+                  <div class="row ">
                     <div class="col-12">
-                      <p>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                    </div>
-                  </div>  
-                  <div class="row comment  p-2 mt-3">
-                    
-                    <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
-                    
-                    
-                    <div class="col-12 ">
-                      <div class="row">
-                        
-                        <div class="col-11">
-                          <p class="text-primary">username<br>
-                          1399/3/8</p>
-                        </div>
-                        <div class="col-1" style="left:-2%;">
-                          <i class="fa fa-user" style="font-size: 50px;"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <p>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                      <h4  style="text-align: center;">نظری برای نمایش وجود ندارد</h1>
                     </div>
                   </div>
+                  {% endif %}
                   
                   <!-- Comment submit -->
                   <div class="row mt-3">
@@ -139,18 +108,18 @@
                         <textarea class="form-control" style="direction: rtl;" id="exampleFormControlTextarea1" rows="3"></textarea> -->
                         {% if new_comment %}
                           <div class="alert alert-success" role="alert">
-                            Your comment is awaiting moderation
+                            کامنت شما پس از تایید نمایش داده خواهد شد
                           </div>
                         {% else %}
-                          <h3>Leave a comment</h3>
-                          <form method="post" style="margin-top: 1.3em;">
+                          <h3>کامنتت خود را بنویسید</h3>
+                          <form method="post" style="margin-top: 1.3em;text-align: right;direction: rtl;">
                             {{ comment_form|crispy }}
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                            <button type="submit" class="btn btn-success  btn-lg">ثبت نظر</button>
                           </form>
                         {% endif %}
                       </div>
-                      <button type="submit" class="btn btn-success">ثبت نظر</button>
+                      
                     </div>
                   </div>
                 </div>

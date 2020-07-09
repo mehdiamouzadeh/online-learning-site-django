@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 
 # Register your models here.
 from .models import Course,Category,Session,Comment
-
+from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin	
 
 class SessionAdmin(admin.ModelAdmin):
     # exclude=['username']
@@ -21,7 +21,8 @@ class SessionAdmin(admin.ModelAdmin):
         if db_field.name == "course" and not request.user.is_superuser:
             kwargs["queryset"] = Course.objects.filter(username=request.user)
             return db_field.formfield(**kwargs)
-        return super(SessionAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)        
+        return super(SessionAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+                
 class CourseAdmin(admin.ModelAdmin):
     # exclude=['username']
     def get_queryset(self, request):
@@ -45,9 +46,9 @@ class CourseAdmin(admin.ModelAdmin):
 
         return super(CourseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-    list_display=['name','username','publish']
+    list_display=['name','username','publish','created']
 
-class CommentAdmin(admin.ModelAdmin):
+class CommentAdmin(ModelAdminJalaliMixin,admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'user':
             kwargs['initial'] = request.user.id
