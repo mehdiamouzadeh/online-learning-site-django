@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home',
     'crispy_forms',
-    'jalali_date'
+    'jalali_date',
+    
 ]
 
 MIDDLEWARE = [

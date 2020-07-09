@@ -41,50 +41,7 @@
         <div class="background-image"></div>
         
         <!--navbarrrrr  -->
-        <div class="row z">
-            <div class="col-12">
-                <nav class="navbar fixed-top navbar-expand-lg navbar-light ">
-                    <a class="navbar-brand" href="#">آموزش آنلاین</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                  
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="#">خانه <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">دوره ها</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            دسته بندی
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">برنامه نویسی</a>
-                            <a class="dropdown-item" href="#">طراحی سایت</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">موارد دیگر</a>
-                          </div>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">درباره ما</a>
-                        </li>
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                          <a class="nav-link " href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">خروج</a>
-                        </li>
-                        {% endif %}
-                      </ul>
-                      <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">جست و جو</button>
-                      </form>
-                    </div>
-                  </nav>
-            </div>
-        </div>
+        {% include 'navbar.html' %}
         <!--endnavbar  -->
         <div class="container content z h-100">
           <div class="row h-100 align-items-center">
@@ -125,12 +82,15 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
-                      <form method="POST" class="form-group">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <button type="submit" class="btn btn-success">Register</button>
-                      </form>
+                    <div class="modal-body" style="text-align: center;">
+                      <div class="row">
+                        <div class="col-6">
+                          <a  class="btn btn-success" href="{% url 'app-home:signup' %}"> ثبت نام به عنوان معلم</a>
+                        </div>
+                        <div class="col-6">
+                          <a  class="btn btn-success"> ثبت نام به عنوان دانش آموز</a>
+                        </div>
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

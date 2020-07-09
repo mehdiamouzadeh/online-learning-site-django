@@ -11,6 +11,7 @@ def index(request):
     context={
         'courses':course,
         'categories':categories,
+        "home_page": "active"
     }
     return render(request,'index.html',context)
 
@@ -78,7 +79,7 @@ def signup(request):
             return redirect('Home:signup')
     else:
         form = RegisterForm()
-    return render(request,'signup.html',{'form':form})                    
+    return render(request,'signup.html',{'form':form,"signup_page": "active"})                    
 
     
         
