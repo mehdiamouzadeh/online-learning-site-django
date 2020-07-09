@@ -27,7 +27,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r"^login/$", auth_views.LoginView.as_view(template_name= 'login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
     path('', include(('Home.urls','Home'),namespace='app-home')),
 
