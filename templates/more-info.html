@@ -34,9 +34,12 @@
                           </ul>
                           <hr>
                           <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                              {{detail.description}}
+                            <!-- description------------------- -->
+                            <div class="tab-pane fade show active" style="background-color: azure;padding:4%" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                              {{detail.description|safe}}
                             </div>
+
+                            <!-- session--------------- -->
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                               {% for session in sessions %}
                                 
@@ -69,38 +72,41 @@
                     </div>
                   </div>
                   {% if detail.comments.all %}
-                  {% for comment in comments %}
-                  <div class="row comment  p-2 mt-3">
-                    
-                    <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
-                    
-                    
-                    <div class="col-12 ">
-                      <div class="row">
-                        
-                        <div class="col-11">
-                          <p class="text-primary">{{comment.user}}<br>
-                          {{comment.created_on|to_jalali}}</p>
-                        </div>
-                        <div class="col-1 " style="left:-2%;">
-                          <i class="fa fa-user" style="font-size: 50px;"></i>
+                    {% for comment in comments %}
+                    <div class="row comment  p-2 mt-3">
+                      
+                      <!-- <div class="col-10">ارسال شده در 1399/03/04 <span class="pl-3" style="border-left: 1px solid black;">username</span></div> -->
+                      
+                      
+                      <div class="col-12 ">
+                        <div class="row">
+                          
+                          <div class="col-11">
+                            <p class="text-primary">{{comment.user}}<br>
+                            {{comment.created_on|to_jalali}}</p>
+                          </div>
+                          <div class="col-1 " style="left:-2%;">
+                            <i class="fa fa-user" style="font-size: 50px;"></i>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-12">
-                      <p>{{comment.body}}</p>
-                    </div>
-                  </div>  
-                  {% endfor %}
+                      <div class="col-12">
+                        <p>{{comment.body}}</p>
+                      </div>
+                    </div>  
+                    {% endfor %}
                   {% else %}
                   <div class="row ">
                     <div class="col-12">
-                      <h4  style="text-align: center;">نظری برای نمایش وجود ندارد</h1>
+                      <div class="alert alert-warning" style="text-align: center;" role="alert">
+                        نظری برای نمایش وجود ندارد
+                      </div>                    
                     </div>
                   </div>
                   {% endif %}
                   
                   <!-- Comment submit -->
+                  {% if request.user.is_authenticated %}
                   <div class="row mt-3">
                     <div class="col-12">
                       <div class="form-group">
@@ -122,6 +128,17 @@
                       
                     </div>
                   </div>
+                  {% else %}
+                    <div class="row mt-3">
+                      <div class="col-12">
+                        <h3>کامنتت خود را بنویسید</h3>
+
+                        <div class="alert alert-warning" style="text-align: center;" role="alert">
+                          برای نظر دادن وارد سایت شوید
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
                 </div>
                 <div class="col-md-4 col-sm-12 mt-2 ">
                     <div class="row">

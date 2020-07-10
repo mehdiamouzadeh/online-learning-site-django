@@ -12,7 +12,7 @@
                   <a class="nav-link " href="{% url 'app-home:index' %}">خانه <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">دوره ها</a>
+                  <a class="nav-link {{course_page}}" href="{% url 'app-home:course_all' %}">دوره ها</a>
                 </li>
                 <li class="nav-item {{signup_page}}">
                   <a class="nav-link" href="{%url 'app-home:signup'%}">ثبت نام</a>
@@ -37,8 +37,8 @@
                 </li>
                 {% endif %}
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <form class="form-inline my-2 my-lg-0" action="{% url 'app-home:course_all'  %}" >
+                <input class="form-control mr-sm-2"  name="q" value="{{request.GET.q}}" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">جست و جو</button>
               </form>
             </div>

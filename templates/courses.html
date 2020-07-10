@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load jalali_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <h1>
+            تمام دوره ها
+            </h1>
+        </div>
+    </div>
+     <div class="row">
+        {% for course in courses %}
+        <div class="col-3 mb-2" >
+            <div class="card" >
+              <div class="inner">
+                
+                <img src="{{course.image.url}}" class="card-img-top" width="300px" height="200px" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{course.name}}</h5>
+                <p class="card-text">{{course.description|truncatewords:4|safe}}</p>
+                <div class="row mb-1">
+                  <div class="col-12">
+                    {{course.created|to_jalali:'%y/%m/%d_%H:%M:%S'}} <i class="fa fa-clock-o" ></i>
+                  </div>
+                  <div class="col-12">
+                    {{course.username}} <i class=" fa fa-user" ></i>
+                  </div>
+                </div>
+                <a href="{% url 'app-home:detail' course.id %}" class="btn btn-primary">ادامه مطلب</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+    </div> 
+    </div>
+    
+
+{% endblock %}    

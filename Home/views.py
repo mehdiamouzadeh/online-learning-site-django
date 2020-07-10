@@ -2,22 +2,41 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.db.models import Q
 from .forms import RegisterForm , CommentForm
 from .models import *
 # Create your views here.
 def index(request):
     course = Course.objects.all()[:5]
     categories =Category.objects.all()
+    search_list =request.GET.get('q')
+    if search_list :
+        course = Course.objects.filter(
+            Q(description__icontains = search_list) | Q(name__icontains = search_list)
+        ).distinct()
     context={
+        # 'posts':posts,
         'courses':course,
         'categories':categories,
         "home_page": "active"
     }
     return render(request,'index.html',context)
 
+def Courses(request):
+    course = Course.objects.all()
+    search_list =request.GET.get('q')
+    if search_list :
+        course = Course.objects.filter(
+            Q(description__icontains = search_list) | Q(name__icontains = search_list)
+        ).distinct()
+    context={
+        'courses':course,
+        "course_page": "active"
 
-
+    }
+    return render(request,'courses.html',context)
 def Coursedetail(request,id):
+
     detail_course =Course.objects.get(id=id)
     sessions = detail_course.session_set.all()
     counts = detail_course.session_set.all().count()

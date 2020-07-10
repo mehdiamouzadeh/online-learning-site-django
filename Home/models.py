@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
+from ckeditor_uploader.fields import  RichTextUploadingField
 from django.contrib.auth import get_user_model
 user = get_user_model()
 from django_currentuser.middleware import (
@@ -26,7 +27,7 @@ class Course(models.Model):
     image = models.ImageField(upload_to='media/')
     created = models.DateTimeField(auto_now = True)
     updated = models.DateTimeField(auto_now_add = True)
-    description = models.TextField()
+    description = RichTextUploadingField()
     category = models.ForeignKey('Category', verbose_name="Category",on_delete=models.CASCADE)
     publish = models.BooleanField(default=False)
     # tutor = models.ManyToManyField('مربی' , null = True, blank = True , related_name = _('Tutor courses'))
