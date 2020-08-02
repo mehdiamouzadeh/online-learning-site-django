@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.db.models import Q
 from .forms import RegisterForm , CommentForm
 from .models import *
@@ -14,6 +15,7 @@ def index(request):
         course = Course.objects.filter(
             Q(description__icontains = search_list) | Q(name__icontains = search_list)
         ).distinct()
+       
     context={
         # 'posts':posts,
         'courses':course,
@@ -29,6 +31,9 @@ def Courses(request):
         course = Course.objects.filter(
             Q(description__icontains = search_list) | Q(name__icontains = search_list)
         ).distinct()
+    paginator = Paginator(course, 2) # Show 2 contacts per page
+    page = request.GET.get('page')
+    course = paginator.get_page(page)     
     context={
         'courses':course,
         "course_page": "active"

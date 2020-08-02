@@ -35,6 +35,47 @@
           </div>
           {% endfor %}
     </div> 
+    <div class="row">
+              {% if courses.has_other_pages %}
+                <div class="col-md-12">
+                  <nav role="navigation">
+                    <ul class="pagination custom-pagination pagination-lg">
+                      {% if courses.has_previous %}
+                        <li class="page-item prev">
+                          <a class="page-link" href="?page={{ courses.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                      {% else %}
+                        <li class="disabled"></li>
+                      {% endif %}  
+
+                      {% for pages in courses.paginator.page_range %}
+                        {% if courses.number == pages %}
+                          <li class="page-item active " >
+                              <a class="page-link" style="border-radius: 40px;" href="#">{{pages}}</a>
+                          </li>
+                        {% else  %}
+                          <li class="page-item " >
+                              <a class="page-link" style="border-radius: 40px;" href="?page={{pages}}">{{pages}}</a>
+                          </li> 
+                        {% endif %} 
+                      {% endfor %}    
+
+
+
+                      {% if courses.has_next %}
+                        <li class="page-item ">
+                          <a class="page-link " href="?page={{ courses.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                        </li>
+                      {% else %}
+                        <li class="disabled"></li>
+                      {% endif %}   
+
+                      
+                    </ul>
+                  </nav>
+                </div>
+                {% endif %}
+            </div>
     </div>
     
 

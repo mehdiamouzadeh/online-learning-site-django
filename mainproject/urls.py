@@ -20,7 +20,7 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 
 from django.conf.urls import url
-
+admin.site.site_header = 'سایت آموزش آنلاین'
 
 # ^login/$
 urlpatterns = [
