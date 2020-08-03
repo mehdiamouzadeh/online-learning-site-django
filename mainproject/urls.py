@@ -24,7 +24,7 @@ admin.site.site_header = 'سایت آموزش آنلاین'
 
 # ^login/$
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name="admin"),
     url(r"^login/$", auth_views.LoginView.as_view(template_name= 'login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

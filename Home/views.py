@@ -9,6 +9,8 @@ from .models import *
 # Create your views here.
 def index(request):
     course = Course.objects.all()[:5]
+    category = Category.objects.all()[:3]
+    comments = Comment.objects.all()[:3]
     categories =Category.objects.all()
     search_list =request.GET.get('q')
     if search_list :
@@ -18,14 +20,18 @@ def index(request):
        
     context={
         # 'posts':posts,
+        'comments':comments,
         'courses':course,
+        'category':category,
         'categories':categories,
         "home_page": "active"
     }
     return render(request,'index.html',context)
 
 def Courses(request):
-    course = Course.objects.all()
+    category = Category.objects.all()[:3]
+
+    course = Course.objects.published()
     search_list =request.GET.get('q')
     if search_list :
         course = Course.objects.filter(
@@ -35,14 +41,16 @@ def Courses(request):
     page = request.GET.get('page')
     course = paginator.get_page(page)     
     context={
+        'category':category,
         'courses':course,
         "course_page": "active"
 
     }
     return render(request,'courses.html',context)
 def Coursedetail(request,id):
-
+    category = Category.objects.all()[:3]
     detail_course =Course.objects.get(id=id)
+    related_course = Course.objects.filter(category=detail_course.category).exclude(id=id)
     sessions = detail_course.session_set.all()
     counts = detail_course.session_set.all().count()
     comments = detail_course.comments.filter(active=True)
@@ -61,9 +69,11 @@ def Coursedetail(request,id):
     else:
         comment_form = CommentForm()
     context={
+        'category':category,
         'detail':detail_course,
         'sessions':sessions,
         'counts':counts,
+        'related_course':related_course,
         'comments': comments,
         'new_comment': new_comment,
         'comment_form': comment_form
@@ -105,6 +115,22 @@ def signup(request):
         form = RegisterForm()
     return render(request,'signup.html',{'form':form,"signup_page": "active"})                    
 
-    
+def signup_student(request):
+
+    if request.method == 'POST':
+        form =  RegisterForm(request.POST)
+        if form.is_valid():
+            user=form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
+            user = authenticate(username=username, password=raw_password)
+            user.save() 
+            login(request,user)
+            return redirect('Home:signup-student')
+    else:
+        form = RegisterForm()
+    return render(request,'signup-student.html',{'form':form,"signup_page": "active"}) 
         
    

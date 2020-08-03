@@ -45,8 +45,19 @@ class CourseAdmin(admin.ModelAdmin):
             return db_field.formfield(**kwargs)
 
         return super(CourseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    def publish_course(self, request, queryset):
+        queryset.update(publish=True)
+    publish_course.short_description = 'تایید پست'
+    actions = ['publish_course']
+    def get_actions(self, request):
+            actions = super(CourseAdmin, self).get_actions(request)
+            if not request.user.is_superuser :
+                if 'publish_course' in actions:
+                    del actions['publish_course']
+            return actions
 
-    list_display=['name','username','publish','created']
+
+    list_display=['name','username','publish','category','created']
 
 class CommentAdmin(ModelAdminJalaliMixin,admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -61,7 +72,8 @@ class CommentAdmin(ModelAdminJalaliMixin,admin.ModelAdmin):
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
-        queryset.update(active=True)               
+        queryset.update(active=True) 
+    approve_comments.short_description="تایید کامنت"                   
 
 admin.site.register(Comment,CommentAdmin)
                 

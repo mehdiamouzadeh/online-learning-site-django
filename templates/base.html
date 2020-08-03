@@ -47,7 +47,7 @@
           <div class="row h-100 align-items-center">
             <div class="col-12 text-right">
               <h1 class="font-weight-light animated bounceInLeft">..آموزش آنلاین برنامه نویسی , طراحی سایت و</h1>
-              <p class="lead animated bounceInLeft delay-1s">A great starter layout for a landing page</p>
+              <p class="lead animated bounceInLeft delay-1s">یه سایت خوب برای یادگیری بیشتر</p>
               {% if request.user.is_anonymous %}
               <button class="btn btn-success animated bounceInUp" type="button"data-toggle="modal" data-target="#exampleModalCenter">ورود</button>
               {% endif %}
@@ -88,7 +88,7 @@
                           <a  class="btn btn-success" href="{% url 'app-home:signup' %}"> ثبت نام به عنوان معلم</a>
                         </div>
                         <div class="col-6">
-                          <a  class="btn btn-success"> ثبت نام به عنوان دانش آموز</a>
+                          <a  class="btn btn-success" href="{% url 'app-home:signup-student' %}" style="color: white;"> ثبت نام به عنوان دانش آموز</a>
                         </div>
                       </div>
                     </div>

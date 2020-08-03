@@ -11,6 +11,11 @@ from django_currentuser.middleware import (
 # As model field:
 from django_currentuser.db.models import CurrentUserField
 
+class PublishManager(models.Manager):
+    def published(self):
+        return self.filter(publish=True)
+
+
 # Create your models here.
 def validate_file_extension(value):
     import os
@@ -21,6 +26,11 @@ def validate_file_extension(value):
         raise ValidationError('Unsupported file extension.')
 
 class Course(models.Model):
+    CONTINUE = 'در حال برگزاری'
+    STATUS_CHOICE = (
+        (CONTINUE,'درحال برگزاری'),
+        ('تکمیل شده',"تکمیل شده"),
+    )
     username = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length = 70)
     # slug = models.SlugField()
@@ -28,11 +38,12 @@ class Course(models.Model):
     created = models.DateTimeField(auto_now = True)
     updated = models.DateTimeField(auto_now_add = True)
     description = RichTextUploadingField()
+    status = models.CharField(max_length=15,choices=STATUS_CHOICE,verbose_name="وضعیت دوره",null=True,default=CONTINUE)
     category = models.ForeignKey('Category', verbose_name="Category",on_delete=models.CASCADE)
     publish = models.BooleanField(default=False)
     # tutor = models.ManyToManyField('مربی' , null = True, blank = True , related_name = _('Tutor courses'))
 
-
+    objects = PublishManager()
     def __str__(self):
         return self.name
 
@@ -56,6 +67,7 @@ class Comment(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=255, verbose_name="عنوان دسته بندی")
+    image = models.ImageField(upload_to='media/',null=True)
     class Meta:
         verbose_name = ('دسته بندی')
         verbose_name_plural = ('دسته بندی ها')

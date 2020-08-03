@@ -22,15 +22,18 @@
                     دسته بندی
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">برنامه نویسی</a>
-                    <a class="dropdown-item" href="#">طراحی سایت</a>
+                    {% for category in category %}
+                    <a class="dropdown-item" href="{% url  'app-home:category' category %}">{{category}}</a>
+                    {% endfor %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">موارد دیگر</a>
                   </div>
                 </li>
+                {% if request.user.is_staff %}
                 <li class="nav-item">
-                  <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">درباره ما</a>
+                  <a class="nav-link " href="{% url 'admin:index' %}" tabindex="-1" aria-disabled="true">پنل ادمین</a>
                 </li>
+                {% endif %}
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
                   <a class="nav-link " href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">خروج</a>

@@ -13,28 +13,41 @@
 </div>
  <div class="row">
     {% for course in courses %}
-    <div class="col-3 mb-2">
-        <div class="card" >
-          <div class="inner">
-            <img src="{{course.image.url}}" class="card-img-top" width="300px" height="200px" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{course.title}}</h5>
-            <p class="card-text">{{course.description|truncatewords:4|safe}} ...</p>
-            <div class="row mb-1">
-              <div class="col-6">
-                <i class="fa fa-clock-o" >{{course.created|to_jalali}}</i>
-              </div>
-              <div class="col-6">
-                <i class=" fa fa-user" >{{course.username}}</i>
-              </div>
+    {% if course.publish %}
+    <div class="col-3 mb-2" >
+      <div class="card" >
+        <div class="inner">
+          
+          <img src="{{course.image.url}}" class="card-img-top" width="300px" height="200px" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <p class="card-text">{{course.description|truncatewords:4|safe}}</p>
+          <div class="row mb-1">
+            <div class="col-12">
+              {{course.created|to_jalali:'%y/%m/%d_%H:%M:%S'}} <i class="fa fa-clock-o" ></i>
             </div>
-            <a href="{% url 'app-home:detail' course.id %}" class="btn btn-primary">ادامه مطلب</a>
+            <div class="col-12">
+              {{course.username}} <i class=" fa fa-user" ></i>
+            </div>
           </div>
+          <a href="{% url 'app-home:detail' course.id %}" class="btn btn-primary">ادامه مطلب</a>
         </div>
       </div>
-      {% endfor %}
-</div> 
+    </div>
+    {% endif %}    
+
+        <!-- <div class="col-12">
+          <div class="alert alert-warning" style="text-align: center;" role="alert">
+            دوره ای برای نمایش وجود ندارد
+          </div>                    
+        </div>   -->
+    
+    {% endfor %}
+</div>
+
+
+
 </div>
 
 {% endblock %}
