@@ -7,18 +7,18 @@ the website with django that has two type of user such as Teacher and Student.wh
 
 <h3>activate env<h3/>
 
-<code>venv\Scripts\activate.bat<code/>
+<p>venv\Scripts\activate.bat<p/>
 
 <h3>install django<h3/>
-<code>pip install django==2.2<code/>
+<p>pip install django==2.2<p/>
 
 <h3>install requierments.txt to install django libraries<h3/>
 
-<code>pip install -r requiermens.txt<code/>
+<p>pip install -r requiermens.txt<p/>
 
 <h3>migrate to Db<h3/>
-<code>python manage.py makemigratons<code/>
-<code>python manage.py migrate<code/>
+<p>python manage.py makemigratons<p/>
+<p>python manage.py migrate<p/>
 
 <h3>run server<h3/>
-<code>python manage.py runserver<code/>
+<p>python manage.py runserver<p/>
