@@ -9,4 +9,16 @@ the website with django that has two type of user such as Teacher and Student.wh
 
 <code>venv\Scripts\activate.bat<code/>
 
+<h3>install django<h3/>
+<code>pip install django==2.2<code/>
 
+<h3>install requierments.txt to install django libraries<h3/>
+
+<code>pip install -r requiermens.txt<code/>
+
+<h3>migrate to Db<h3/>
+<code>python manage.py makemigratons<code/>
+<code>python manage.py migrate<code/>
+
+<h3>run server<h3/>
+<code>python manage.py runserver<code/>
